@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
     HStack,
     VStack,
@@ -13,26 +13,43 @@ import {
 
 } from '@chakra-ui/react';
 import PageViewGraph from './charts/PageViewGraph';
-import LocationPieGraph from './charts/LocationPieGraph';
-import { IPieData } from '../types/interfaces.types';
+import PieGraph from './charts/PieGraph';
+import { IGraphData, IPieDataForLocation, IPieDataForSources } from '../types/interfaces.types';
+import ChartService from '../services/chart.service';
+import { dateToLongDate, objectToArray } from '../constants/usables.constant';
 
 
 const Dashboard = () => {
-    const locationPieData: IPieData[] = [
-        { name: 'Nigeria', value: 50, color: '#599EEA' },
-        { name: 'United States', value: 24, color: '#844FF6' },
-        { name: 'Netherlands', value: 24, color: '#0FB77A' },
-        { name: 'Andorra', value: 24, color: '#FAB70A' },
-        { name: 'Others', value: 24, color: '#F09468' },
-    ];
 
-    const referralPieData: IPieData[] = [
-        { name: 'Facebook', value: 50, color: '#599EEA' },
-        { name: 'Instagram', value: 24, color: '#844FF6' },
-        { name: 'LinkedIn', value: 24, color: '#0FB77A' },
-        { name: 'Twitter', value: 24, color: '#FAB70A' },
-        { name: 'Others', value: 24, color: '#F09468' },
-    ];
+    const [locations, setLocations] = useState<IPieDataForLocation[]>([]);
+    const [sources, setSources] = useState<IPieDataForSources[]>([]);
+    const [graphData, setGraphData] = useState<unknown>();
+    const [graphDataModified, setGraphDataModified] = useState<IGraphData[]>();
+
+    useEffect(() => {
+        ChartService.getPieData()
+            .then((response: any) => {
+                setLocations(response.data.top_locations);
+                setSources(response.data.top_sources);
+                setGraphData(response.data.graph_data);
+            })
+            .catch((e: Error) => {
+                console.log(e);
+            });
+    }, []);
+
+    useEffect(() => {
+        if (graphData?.views) {
+            const dataCheck = objectToArray(graphData?.views);
+            setGraphDataModified(dataCheck);
+            const dataChecked = dataCheck.forEach((item) => {
+                item.key = dateToLongDate(item.key);
+            })
+        }
+    }, [graphData])
+
+    const pageCount = 0 || graphDataModified && graphDataModified.reduce((accumulator, currentObject) => accumulator + currentObject.value, 0);
+
     return (
         <>
             <Box bg='brandWhite' minH='inherit' w='100vw'>
@@ -74,12 +91,12 @@ const Dashboard = () => {
                             </VStack>
                         </HStack>
                         <Heading size='lg' fontSize='48px' my='30px'>
-                            500
+                            {pageCount ? pageCount : 0}
                         </Heading>
-                        <PageViewGraph />
+                        {graphDataModified && <PageViewGraph data={graphDataModified} />}
                     </Box>
 
-                    <Box my='24px'>
+                    <Box my='24px' overflow='clip'>
                         <HStack spacing='16px' w='100%'>
                             <Box
                                 border={'1px solid'}
@@ -95,12 +112,12 @@ const Dashboard = () => {
                                 <Box style={{ width: '100%' }}>
                                     <HStack my='30px'>
                                         <VStack align='left' w='40%' spacing='18px'>
-                                            {locationPieData.map((entry, index) => (
-                                                <Heading key={`cell-${index}`} as='h6' fontSize='14px'>{entry.name}   {entry.value}%</Heading>
+                                            {locations.map((entry, index) => (
+                                                <Heading key={`cell-${index}`} as='h6' fontSize='14px'>{entry.country}   {entry.percent}%</Heading>
                                             ))}
                                         </VStack>
                                         <>
-                                            <LocationPieGraph data={locationPieData} />
+                                            {locations && <PieGraph data={locations} />}
                                         </>
                                     </HStack>
                                 </Box>
@@ -121,22 +138,17 @@ const Dashboard = () => {
                                 <Box style={{ width: '100%' }}>
                                     <HStack my='30px'>
                                         <VStack align='left' w='40%' spacing='18px'>
-                                            {referralPieData.map((entry, index) => (
-                                                <Heading key={`cell-${index}`} as='h6' fontSize='14px'>{entry.name}   {entry.value}%</Heading>
+                                            {sources.map((entry, index) => (
+                                                <Heading key={`cell-${index}`} as='h6' fontSize='14px'>{entry.source}   {entry.percent}%</Heading>
                                             ))}
                                         </VStack>
                                         <>
-                                            <LocationPieGraph data={referralPieData} />
+                                            {locations && <PieGraph data={sources} />}
                                         </>
                                     </HStack>
                                 </Box>
 
                             </Box>
-                            {/* <Box border={'1px solid'}
-                                borderColor={useColorModeValue('gray.200', 'gray.700')}
-                                p='24px' borderRadius='10px' w='50%'>
-                                Top Referral source
-                            </Box> */}
                         </HStack>
                     </Box>
                 </Container>

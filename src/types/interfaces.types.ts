@@ -1,6 +1,18 @@
 import { ComponentWithAs, IconProps } from "@chakra-ui/react";
 
-interface IPieData {
+interface IPieDataForLocation {
+    count: number;
+    percent: number;
+    country: string;
+}
+
+interface IPieDataForSources {
+    count: number;
+    percent: number;
+    source: string;
+}
+
+interface IPieData extends IPieDataForLocation, IPieDataForSources {
     name: string;
     value: number;
     color: string;
@@ -18,4 +30,9 @@ interface INavObject {
     subNavs: INavNestedObject[];
 }
 
-export type { IPieData, INavObject };
+interface IGraphData {
+    key: string;
+    value: number;
+}
+
+export type { IPieData, INavObject, IPieDataForLocation, IPieDataForSources, IGraphData };
