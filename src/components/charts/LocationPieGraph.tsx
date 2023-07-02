@@ -1,5 +1,5 @@
 import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer } from 'recharts';
-import { IPieData } from '../../types/interfaces';
+import { IPieData } from '../../types/interfaces.types';
 
 interface LocationPieGraphProps {
     data: IPieData[]

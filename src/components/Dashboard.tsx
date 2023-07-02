@@ -14,7 +14,7 @@ import {
 } from '@chakra-ui/react';
 import PageViewGraph from './charts/PageViewGraph';
 import LocationPieGraph from './charts/LocationPieGraph';
-import { IPieData } from '../types/interfaces';
+import { IPieData } from '../types/interfaces.types';
 
 
 const Dashboard = () => {
@@ -36,7 +36,7 @@ const Dashboard = () => {
     return (
         <>
             <Box bg='brandWhite' minH='inherit' w='100vw'>
-                <Container justifyContent='flex-start' maxW='100vw' pl={{ base: '20px', md: "320px" }} pr={{ base: 0, md: "60px" }}>
+                <Container justifyContent='flex-start' maxW='100vw' pl={{ base: '20px', md: "380px" }} pr={{ base: 0, md: "60px" }}>
                     <HStack justify='space-between'>
                         <VStack align='flex-start'>
                             <Heading size='lg' fontSize='24px'>

@@ -31,25 +31,30 @@ import {
 interface NavItemProps extends FlexProps {
     icon: ComponentWithAs<"svg", IconProps>;
     children: ReactText;
+    activeState: boolean;
 }
-const NavItem = ({ icon, children, ...rest }: NavItemProps) => {
+
+const NavItem = ({ icon, children, activeState }: NavItemProps) => {
     return (
-        <Link href="#" style={{ textDecoration: 'none' }} _focus={{ boxShadow: 'none' }}>
+        <Link href="#" style={{ textDecoration: 'none' }} _focus={{ boxShadow: 'none' }} my='16px'>
             <Flex
                 align="center"
                 p="4"
-                mx="4"
-                borderRadius="lg"
+                borderLeft={activeState && "2px solid"}
+                borderColor={activeState && "brandOrange"}
+                // borderRadius="lg"
                 role="group"
+
                 cursor="pointer"
                 _hover={{
-                    bg: 'cyan.400',
+                    bg: 'brandOrange',
                     color: 'white',
                 }}
-                {...rest}>
+            >
                 {icon && (
                     <Icon
                         mr="4"
+                        ml="50px"
                         fontSize="16"
                         _groupHover={{
                             color: 'white',
@@ -59,7 +64,7 @@ const NavItem = ({ icon, children, ...rest }: NavItemProps) => {
                 )}
                 {children}
             </Flex>
-        </Link>
+        </Link >
     );
 };
 

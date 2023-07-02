@@ -7,76 +7,49 @@ import {
     Flex,
     Heading,
     Image,
-    useColorModeValue,
-    Link,
-    Drawer,
-    DrawerContent,
     Text,
-    useDisclosure,
+    useColorModeValue,
     BoxProps,
-    FlexProps,
-    Container,
-    ComponentWithAs,
-    IconProps,
 } from '@chakra-ui/react';
+import { Icon, HStack } from '@chakra-ui/react';
+import { MdSettings } from 'react-icons/md'
 
 import { MainStackDashboardIcon, MainStackItemOneIcon, MainStackItemTwoIcon } from './Assets'
 import NavItem from './SidebarItems';
 import MainstackLogo from './../assets/mainstack.svg';
+import { INavObject } from '../types/interfaces.types';
+import { SearchIcon } from '@chakra-ui/icons';
 
 
-interface NestedObject {
-    name: string;
-    icon: ComponentWithAs<"svg", IconProps>;
-}
-
-
-const myArray: MyObject[] = [
+const LinkItems: INavObject[] = [
     {
-        property1: "Object 1",
-        property2: 1,
-        nestedObject: {
-            nestedProperty1: "Nested 1",
-            nestedProperty2: 10,
-        },
-    },
-
-];
-
-interface LinkItemProps {
-    name: string;
-    icon?: ComponentWithAs<"svg", IconProps>;
-    subItems: NestedObject;
-}
-const LinkItems: Array<LinkItemProps> = [
-    {
-        name: 'Home',
+        name: '',
         icon: MainStackDashboardIcon,
-        subItems: {
-            name: 'Dashboard', icon: MainStackDashboardIcon,
-            name: 'Item1', icon: MainStackDashboardIcon,
-            name: 'Item2', icon: MainStackDashboardIcon,
-            name: 'Item3', icon: MainStackDashboardIcon,
-        }
+        subNavs: [
+            { name: 'Dashboard', icon: MainStackDashboardIcon, active: true },
+            { name: 'Item 1', icon: MainStackDashboardIcon, active: false },
+            { name: 'Item 2', icon: MainStackDashboardIcon, active: false },
+            { name: 'Item 3', icon: MainStackDashboardIcon, active: false }
+        ]
     },
     {
-        name: 'Home',
-        icon: MainStackDashboardIcon, subItems: {
-            name: 'Dashboard', icon: MainStackDashboardIcon,
-            name: 'Item1', icon: MainStackDashboardIcon,
-            name: 'Item2', icon: MainStackDashboardIcon,
-            name: 'Item3', icon: MainStackDashboardIcon,
-        }
+        name: 'OTHERS 1',
+        icon: MainStackDashboardIcon,
+        subNavs: [
+            { name: 'Item 4', icon: MainStackDashboardIcon, active: false },
+            { name: 'Item 5', icon: MainStackDashboardIcon, active: false }
+        ]
     },
     {
-        name: 'Home',
-        icon: MainStackDashboardIcon, subItems: {
-            name: 'Dashboard', icon: MainStackDashboardIcon,
-            name: 'Item1', icon: MainStackDashboardIcon,
-            name: 'Item2', icon: MainStackDashboardIcon,
-            name: 'Item3', icon: MainStackDashboardIcon,
-        }
+        name: 'OTHERS 2',
+        icon: MainStackDashboardIcon,
+        subNavs: [
+            { name: 'Item 6', icon: MainStackDashboardIcon, active: false },
+            { name: 'Item 7', icon: MainStackDashboardIcon, active: false },
+            { name: 'Item 8', icon: MainStackDashboardIcon, active: false }
+        ]
     },
+
 ];
 
 
@@ -91,10 +64,11 @@ const Sidebar = ({ onClose, ...rest }: SidebarProps) => {
             bg='brandWhite'
             borderRight="1px"
             borderRightColor={useColorModeValue('gray.200', 'gray.700')}
-            w={{ base: 'full', md: 60 }}
+            w={{ base: 'full', md: '305px' }}
             pos="fixed"
             h="full"
-            {...rest}>
+            {...rest}
+        >
             <Flex h="20" alignItems="center" mx="8" justifyContent="space-between">
                 <Image
                     boxSize='40px'
@@ -104,15 +78,33 @@ const Sidebar = ({ onClose, ...rest }: SidebarProps) => {
                 />
                 <CloseButton display={{ base: 'flex', md: 'none' }} onClick={onClose} />
             </Flex>
-            {LinkItems.map((link) => (
-                <NavItem key={link.name} icon={link.icon}>
-                    {link.name}
-                </NavItem>
+            {LinkItems.map((navcategory) => (
+                <>
+                    <NavItem key={navcategory.name} icon={navcategory.icon}>
+                        {/* <Icon as={navcategory.icon} /> */}
+                        {navcategory.name}
+                    </NavItem>
+                    {navcategory.subNavs.map((link, index) => (
+                        <NavItem key={index} icon={MdSettings} activeState={link.active}>
+                            {/* <Icon as={MdSettings} /> */}
+                            {link.name}
+                        </NavItem>
+
+                    ))}
+                </>
             ))}
+
+            <Box ml="60px">
+                <HStack>
+                    <Avatar name='Dan Abrahmov' src='https://bit.ly/dan-abramov' size='sm' />
+                    <Text>
+                        Blessing Daniels
+                    </Text>
+                    <IconButton aria-label='Search database' icon={<SearchIcon />} />
+                </HStack>
+            </Box>
         </Box>
     );
 };
-
-
 
 export default Sidebar;
