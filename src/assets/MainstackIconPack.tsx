@@ -121,3 +121,14 @@ export const MainstackIcon = createIcon({
         />
     ),
 })
+
+export const MainstackInfoIcon = createIcon({
+    displayName: "MainstackInfoIcon",
+    viewBox: "0 0 20 20",
+    path: (
+        <path
+            d="M9.6 13.8h.8V9.2h-.8v4.6ZM10 8a.5.5 0 0 0 .5-.5l-.1-.4A.5.5 0 0 0 10 7l-.4.1-.1.4.1.3.4.2Zm0 9.5A7.4 7.4 0 0 1 2.5 10 7.4 7.4 0 0 1 10 2.5a7.4 7.4 0 0 1 7.5 7.5 7.4 7.4 0 0 1-7.5 7.5Zm0-.8c1.8 0 3.4-.7 4.7-2 1.3-1.3 2-2.9 2-4.7 0-1.8-.7-3.4-2-4.7a6.4 6.4 0 0 0-4.7-2c-1.8 0-3.4.7-4.7 2a6.4 6.4 0 0 0-2 4.7c0 1.8.7 3.4 2 4.7 1.3 1.3 2.9 2 4.7 2Z"
+            fill='currentColor'
+        />
+    ),
+})

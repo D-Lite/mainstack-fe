@@ -12,7 +12,7 @@ import {
     useColorModeValue,
     Skeleton,
     Circle,
-    Image,
+    Image
 } from '@chakra-ui/react';
 
 import PageViewGraph from './charts/PageViewGraph';
@@ -21,6 +21,7 @@ import { IGraphData, IPieDataForLocation, IPieDataForSources, IGraphObject } fro
 import ChartService from '../services/chart.service';
 import { capitalizeFirstLetter, dateToLongDate, objectToArray, getGreetingTime } from '../constants/usables.constant';
 import { findFlagUrlByCountryName } from "country-flags-svg";
+import { MainstackInfoIcon } from '../assets/MainstackIconPack';
 
 const Dashboard = () => {
 
@@ -114,7 +115,7 @@ const Dashboard = () => {
                         borderColor={useColorModeValue('gray.200', 'gray.700')}
                         px='24px' py='30px' borderRadius='10px'
                     >
-                        <HStack>
+                        <HStack justify='space-between'>
                             <VStack align='left'>
                                 <Skeleton height='40px' isLoaded={isLoaded}>
 
@@ -124,6 +125,7 @@ const Dashboard = () => {
                                     <Text fontSize='14px'>All time</Text>
                                 </Skeleton>
                             </VStack>
+                            <MainstackInfoIcon />
                         </HStack>
 
                         <Skeleton size='20' isLoaded={isLoaded}>
