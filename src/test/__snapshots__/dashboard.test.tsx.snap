@@ -1,0 +1,9 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Dashboard test > should not show the content at the start 1`] = `
+<h2
+  class="chakra-heading css-1flyc9m"
+>
+  Top Locations
+</h2>
+`;

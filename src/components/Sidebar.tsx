@@ -10,14 +10,12 @@ import {
     useColorModeValue,
     BoxProps,
 } from '@chakra-ui/react';
-import { Icon, HStack } from '@chakra-ui/react';
-import { MdSettings } from 'react-icons/md'
+import { HStack } from '@chakra-ui/react';
 
 import { MainStackDashboardIcon, MainStackItemFourIcon, MainStackItemFiveIcon, MainStackItemOneIcon, MainStackItemSixIcon, MainStackItemThreeIcon, MainStackItemTwoIcon, MainStackItemEightIcon, MainStackItemSevenIcon, MainStackMoreToggle } from '../assets/MainstackIconPack'
 import NavItem from './SidebarItems';
 import MainstackLogo from './../assets/mainstack.svg';
 import { INavObject } from '../types/interfaces.types';
-import { SearchIcon } from '@chakra-ui/icons';
 
 
 const LinkItems: INavObject[] = [
@@ -93,7 +91,7 @@ const Sidebar = ({ onClose, ...rest }: SidebarProps) => {
             <Box ml="60px" mt='100px' mr='16px'>
                 <HStack align='center' justify='space-between'>
                     <Flex align='center'>
-                        <Avatar name='Dan Abrahmov' src='https://bit.ly/daniel-olabemiwo' size='sm' />
+                        <Avatar name='Blessing Daniels' src='https://bit.ly/daniel-olabemiwo' size='sm' />
                         <Text ml='12px'>
                             Blessing Daniels
                         </Text>

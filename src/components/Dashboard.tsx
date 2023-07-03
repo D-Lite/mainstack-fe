@@ -110,12 +110,12 @@ const Dashboard = () => {
                         flexWrap={'wrap'}
                     >
                         {daysButton.map((days, index) => (
-                            // <Skeleton size='16' isLoaded={isLoaded}>
-                            <Button key={index} rounded={'full'}
-                                my={'5px'}
-                                variant={days.active === true ? 'dayButtonActive' : 'dayButtonInActive'}
-                            > {days.name}</Button>
-                            // </Skeleton>
+                            <Skeleton key={index} size='16' isLoaded={isLoaded}>
+                                <Button key={index} rounded={'full'}
+                                    my={'5px'}
+                                    variant={days.active === true ? 'dayButtonActive' : 'dayButtonInActive'}
+                                > {days.name}</Button>
+                            </Skeleton>
                         ))}
                     </ButtonGroup>
 
@@ -143,7 +143,7 @@ const Dashboard = () => {
                         </Skeleton>
 
 
-                        <Skeleton height='500px' isLoaded={isLoaded} fadeDuration={4}>
+                        <Skeleton data-testid="graphDataSkeletonTest" height='500px' isLoaded={isLoaded} fadeDuration={4}>
                             {graphDataModified && <PageViewGraph data={graphDataModified} />}
                         </Skeleton>
                     </Box>
@@ -167,7 +167,7 @@ const Dashboard = () => {
                                 </HStack>
 
                                 <Box style={{ width: '100%' }}>
-                                    <Skeleton height='300px' isLoaded={isLoaded} fadeDuration={4}>
+                                    <Skeleton height='300px' isLoaded={isLoaded} fadeDuration={4} data-testid="locationsPieSkeletonTest">
 
                                         <Stack my='30px' direction={['column', 'column', 'column', 'column', 'row']}>
                                             <VStack align='left' w='100%' spacing='18px'>
@@ -201,7 +201,7 @@ const Dashboard = () => {
                                 </HStack>
 
                                 <Box style={{ width: '100%' }}>
-                                    <Skeleton height='300px' isLoaded={isLoaded} fadeDuration={4}>
+                                    <Skeleton height='300px' isLoaded={isLoaded} fadeDuration={4} data-testid="sourcesPieSkeletonTest">
                                         <Stack my='30px' direction={['column', 'column', 'column', 'column', 'row']}>
                                             <VStack align='left' w='100%' spacing='18px'>
                                                 {sources.map((entry, index) => (
