@@ -1,12 +1,9 @@
-import { Container, Drawer, DrawerContent, VStack, useDisclosure } from '@chakra-ui/react'
-import './App.css'
-import { useTheme } from '@chakra-ui/react'
+import { Container, Drawer, DrawerContent, useDisclosure } from '@chakra-ui/react'
 import Sidebar from './components/Sidebar'
 import Dashboard from './components/Dashboard'
 import TopNav from './components/Topbar'
 
 function App() {
-  const theme = useTheme();
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
@@ -36,4 +33,4 @@ function App() {
   )
 }
 
-export default App
+export default App;

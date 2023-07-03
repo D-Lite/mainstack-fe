@@ -3,11 +3,11 @@ import { IPieDataForLocation, IPieDataForSources } from '../../types/interfaces.
 
 interface LocationPieGraphProps {
     data: IPieDataForLocation[] | IPieDataForSources[];
+    colors: Array<string>;
 }
 
 
-const PieGraph = ({ data }: LocationPieGraphProps) => {
-    const colors: Array<string> = ['#599EEA', '#844FF6', '#0FB77A', '#FAB70A', '#F09468'];
+const PieGraph = ({ data, colors }: LocationPieGraphProps) => {
     return (
         <div style={{ width: '100%', height: 230, overflow: 'hidden' }}>
             <ResponsiveContainer >

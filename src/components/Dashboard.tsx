@@ -11,6 +11,7 @@ import {
     Button,
     useColorModeValue,
     Skeleton,
+    Circle,
 } from '@chakra-ui/react';
 
 import PageViewGraph from './charts/PageViewGraph';
@@ -89,6 +90,9 @@ const Dashboard = () => {
         afternoon: '☀️',
         evening: '🌙'
     }
+
+    const colors: Array<string> = ['#599EEA', '#844FF6', '#0FB77A', '#FAB70A', '#F09468'];
+
     return (
         <>
             <Box bg='brandWhite' minH='inherit' w='100vw'>
@@ -172,11 +176,14 @@ const Dashboard = () => {
                                         <Stack my='30px' direction={['column', 'column', 'column', 'column', 'row']}>
                                             <VStack align='left' w='100%' spacing='18px'>
                                                 {locations.map((entry, index) => (
-                                                    <Heading key={`cell-${index}`} as='h6' fontSize='14px'>{capitalizeFirstLetter(entry.country)}   {entry.percent}%</Heading>
+                                                    <HStack align='left' w='100%' alignItems='center'>
+                                                        <Heading key={`cell-${index}`} as='h6' fontSize='14px'>{capitalizeFirstLetter(entry.country)}   {entry.percent}%</Heading>
+                                                        <Circle size='3' ml='12px' bg={colors[index]} />
+                                                    </HStack>
                                                 ))}
                                             </VStack>
                                             <>
-                                                {locations && <PieGraph data={locations} />}
+                                                {locations && <PieGraph data={locations} colors={colors} />}
                                             </>
                                         </Stack>
                                     </Skeleton>
@@ -205,11 +212,14 @@ const Dashboard = () => {
                                         <Stack my='30px' direction={['column', 'column', 'column', 'column', 'row']}>
                                             <VStack align='left' w='100%' spacing='18px'>
                                                 {sources.map((entry, index) => (
-                                                    <Heading key={`cell-${index}`} as='h6' fontSize='14px'>{capitalizeFirstLetter(entry.source)}   {entry.percent}%</Heading>
+                                                    <HStack align='left' w='100%' alignItems='center'>
+                                                        <Heading key={`cell-${index}`} as='h6' fontSize='14px'>{capitalizeFirstLetter(entry.source)}   {entry.percent}% </Heading>
+                                                        <Circle size='3' ml='12px' bg={colors[index]} />
+                                                    </HStack>
                                                 ))}
                                             </VStack>
                                             <>
-                                                {sources && <PieGraph data={sources} />}
+                                                {sources && <PieGraph data={sources} colors={colors} />}
                                             </>
                                         </Stack>
                                     </Skeleton>
