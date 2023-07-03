@@ -15,3 +15,18 @@ export function objectToArray<T>(obj: { [key: string]: T }): Array<{ key: string
 export function capitalizeFirstLetter(str: string): string {
     return str.charAt(0).toUpperCase() + str.slice(1);
 }
+
+export function getGreetingTime(): 'morning' | 'afternoon' | 'evening' {
+    const currentHour = new Date().getHours();
+
+    if (currentHour >= 6 && currentHour < 12) {
+        // currentTimeoftheDay = 'morning';
+        return 'morning';
+    } else if (currentHour >= 12 && currentHour < 18) {
+        // currentTimeoftheDay = 'afternoon';
+        return 'afternoon';
+    } else {
+        // currentTimeoftheDay = 'evening';
+        return 'evening';
+    }
+}

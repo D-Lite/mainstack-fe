@@ -45,12 +45,11 @@ const LinkItems: INavObject[] = [
 
 ];
 
-
 interface SidebarProps extends BoxProps {
     onClose: () => void;
 }
 
-const Sidebar = ({ onClose, ...rest }: SidebarProps) => {
+const Sidebar = ({ onClose }: SidebarProps) => {
     return (
         <Box
             transition="3s ease"
@@ -60,7 +59,6 @@ const Sidebar = ({ onClose, ...rest }: SidebarProps) => {
             w={{ base: 'full', md: '305px' }}
             pos="fixed"
             h="full"
-            {...rest}
         >
             <Flex h="20" alignItems="center" mx="8" justifyContent="space-between">
                 <Image

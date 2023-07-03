@@ -12,13 +12,16 @@ import {
     useColorModeValue,
     Skeleton,
     Circle,
+    Image,
 } from '@chakra-ui/react';
 
 import PageViewGraph from './charts/PageViewGraph';
 import PieGraph from './charts/PieGraph';
 import { IGraphData, IPieDataForLocation, IPieDataForSources } from '../types/interfaces.types';
 import ChartService from '../services/chart.service';
-import { capitalizeFirstLetter, dateToLongDate, objectToArray } from '../constants/usables.constant';
+import { capitalizeFirstLetter, dateToLongDate, objectToArray, getGreetingTime } from '../constants/usables.constant';
+import { findFlagUrlByCountryName } from "country-flags-svg";
+import { ReactSocialMediaIcons } from 'react-social-media-icons';
 
 const Dashboard = () => {
 
@@ -61,22 +64,7 @@ const Dashboard = () => {
         { name: 'Custom Time', active: false }
     ]
 
-    let currentTimeoftheDay: 'morning' | 'afternoon' | 'evening' = 'morning';
-
-    function getGreetingTime(): string {
-        const currentHour = new Date().getHours();
-
-        if (currentHour >= 6 && currentHour < 12) {
-            currentTimeoftheDay = 'morning';
-        } else if (currentHour >= 12 && currentHour < 18) {
-            currentTimeoftheDay = 'afternoon';
-        } else {
-            currentTimeoftheDay = 'evening';
-        }
-
-        return currentTimeoftheDay;
-    }
-    getGreetingTime()
+    const currentTimeoftheDay: 'morning' | 'afternoon' | 'evening' = getGreetingTime();
 
 
     useEffect(() => {
@@ -173,12 +161,19 @@ const Dashboard = () => {
                                 <Box style={{ width: '100%' }}>
                                     <Skeleton height='300px' isLoaded={isLoaded} fadeDuration={4} data-testid="locationsPieSkeletonTest">
 
-                                        <Stack my='30px' direction={['column', 'column', 'column', 'column', 'row']}>
+                                        <Stack my='30px' direction={['column', 'column', 'column', 'column', 'row']} align='center'>
                                             <VStack align='left' w='100%' spacing='18px'>
                                                 {locations.map((entry, index) => (
-                                                    <HStack align='left' w='100%' alignItems='center'>
-                                                        <Heading key={`cell-${index}`} as='h6' fontSize='14px'>{capitalizeFirstLetter(entry.country)}   {entry.percent}%</Heading>
-                                                        <Circle size='3' ml='12px' bg={colors[index]} />
+                                                    <HStack key={`cell-${index}`} align='left' w='100%' alignItems='center'>
+                                                        <Image
+                                                            borderRadius='full'
+                                                            boxSize='20px'
+                                                            src={`${findFlagUrlByCountryName(entry.country)}`}
+                                                            alt={entry.country}
+                                                            fallbackSrc='https://via.placeholder.com/15'
+                                                        />
+                                                        <Heading as='h6' fontSize='14px'>{capitalizeFirstLetter(entry.country)}   {entry.percent}%</Heading>
+                                                        <Circle size='3' ml='6px' bg={colors[index]} />
                                                     </HStack>
                                                 ))}
                                             </VStack>
@@ -209,12 +204,20 @@ const Dashboard = () => {
 
                                 <Box style={{ width: '100%' }}>
                                     <Skeleton height='300px' isLoaded={isLoaded} fadeDuration={4} data-testid="sourcesPieSkeletonTest">
-                                        <Stack my='30px' direction={['column', 'column', 'column', 'column', 'row']}>
+                                        <Stack my='30px' direction={['column', 'column', 'column', 'column', 'row']} align='center'>
                                             <VStack align='left' w='100%' spacing='18px'>
                                                 {sources.map((entry, index) => (
-                                                    <HStack align='left' w='100%' alignItems='center'>
-                                                        <Heading key={`cell-${index}`} as='h6' fontSize='14px'>{capitalizeFirstLetter(entry.source)}   {entry.percent}% </Heading>
-                                                        <Circle size='3' ml='12px' bg={colors[index]} />
+                                                    <HStack key={`cell-${index}`} align='left' w='100%' alignItems='center'>
+                                                        <Image
+                                                            borderRadius='full'
+                                                            boxSize='20px'
+                                                            // src='./src/assets/socials/facebook.svg'
+                                                            src={`./src/assets/socials/${entry.source}.svg`}
+                                                            alt={entry.source}
+                                                            fallbackSrc='https://via.placeholder.com/15'
+                                                        />
+                                                        <Heading as='h6' fontSize='14px'>{capitalizeFirstLetter(entry.source)}   {entry.percent}% </Heading>
+                                                        <Circle size='3' ml='6px' bg={colors[index]} />
                                                     </HStack>
                                                 ))}
                                             </VStack>
