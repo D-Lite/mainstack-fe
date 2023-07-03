@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
     HStack,
     Stack,
@@ -11,7 +11,6 @@ import {
     Button,
     useColorModeValue,
     Skeleton,
-    SkeletonCircle
 } from '@chakra-ui/react';
 
 import PageViewGraph from './charts/PageViewGraph';
@@ -19,7 +18,6 @@ import PieGraph from './charts/PieGraph';
 import { IGraphData, IPieDataForLocation, IPieDataForSources } from '../types/interfaces.types';
 import ChartService from '../services/chart.service';
 import { capitalizeFirstLetter, dateToLongDate, objectToArray } from '../constants/usables.constant';
-import { Flex } from '@chakra-ui/react';
 
 const Dashboard = () => {
 
@@ -77,10 +75,11 @@ const Dashboard = () => {
 
         return currentTimeoftheDay;
     }
+    getGreetingTime()
+
 
     useEffect(() => {
         if (sources && locations && graphDataModified) {
-            getGreetingTime()
             setIsLoaded(true);
         }
     }, [graphDataModified]);
@@ -110,11 +109,13 @@ const Dashboard = () => {
                         my='20px'
                         flexWrap={'wrap'}
                     >
-
                         {daysButton.map((days, index) => (
-                            <Skeleton size='16' isLoaded={isLoaded}>
-                                <Button key={index} rounded={'full'} my={'5px'} colorScheme={days.active === true ? 'red' : 'gray'} bg={days.active ? 'red.300' : 'brandWhite'}>{days.name}</Button>
-                            </Skeleton>
+                            // <Skeleton size='16' isLoaded={isLoaded}>
+                            <Button key={index} rounded={'full'}
+                                my={'5px'}
+                                variant={days.active === true ? 'dayButtonActive' : 'dayButtonInActive'}
+                            > {days.name}</Button>
+                            // </Skeleton>
                         ))}
                     </ButtonGroup>
 
@@ -124,7 +125,7 @@ const Dashboard = () => {
                     >
                         <HStack>
                             <VStack align='left'>
-                                <Skeleton height='80px' isLoaded={isLoaded}>
+                                <Skeleton height='40px' isLoaded={isLoaded}>
 
                                     <Heading size='lg' fontSize='18px'>
                                         Page Views
@@ -134,7 +135,7 @@ const Dashboard = () => {
                             </VStack>
                         </HStack>
 
-                        <Skeleton size='20' my='20px' isLoaded={isLoaded}>
+                        <Skeleton size='20' isLoaded={isLoaded}>
 
                             <Heading size='lg' fontSize='48px' my='30px'>
                                 {pageCount ? pageCount : 0}
