@@ -5,7 +5,7 @@ import Topbar from '../components/Topbar';
 
 describe("Dashboard test", () => {
     test('should render the word dashboard', async () => {
-        render(<Topbar onOpen />)
+        render(<Topbar />)
 
         expect(screen.getByText('Dashboard')).toBeDefined();
     });

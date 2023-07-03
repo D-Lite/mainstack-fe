@@ -22,9 +22,9 @@ const NavItem = ({ icon, children, activeState }: NavItemProps) => {
                 align="center"
                 p="4"
                 pl="60px"
-                borderLeft={activeState && "3px solid"}
-                borderTopColor={activeState && "brandOrange"}
-                color={activeState && "brandOrange"}
+                borderLeft={activeState ? "3px solid" : ''}
+                borderTopColor={activeState ? "brandOrange" : ''}
+                color={activeState ? "brandOrange" : ''}
                 role="group"
 
                 cursor="pointer"

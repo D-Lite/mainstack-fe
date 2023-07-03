@@ -46,7 +46,7 @@ const LinkItems: INavObject[] = [
 ];
 
 interface SidebarProps extends BoxProps {
-    onClose: () => void;
+    onClose?: () => void;
 }
 
 const Sidebar = ({ onClose }: SidebarProps) => {

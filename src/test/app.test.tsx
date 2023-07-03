@@ -1,4 +1,3 @@
-import React from "react";
 import { afterEach, beforeEach, describe, test, vi } from 'vitest';
 import { render } from '@testing-library/react';
 import { ThemeWrapper } from "./util";

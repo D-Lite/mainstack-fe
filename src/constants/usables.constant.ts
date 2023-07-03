@@ -1,4 +1,4 @@
-export function dateToLongDate(date: Date): string {
+export function dateToLongDate(date: string): string {
     const dated = new Date(date);
 
     return dated.toLocaleDateString("en-US", {

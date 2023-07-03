@@ -1,4 +1,3 @@
-import React, { ReactNode } from 'react';
 import {
     IconButton,
     Flex,
@@ -9,7 +8,7 @@ import {
 import { MainstackIcon } from '../assets/MainstackIconPack';
 
 interface MobileProps extends FlexProps {
-    onOpen: () => void;
+    onOpen?: () => void;
 }
 const TopNav = ({ onOpen, ...rest }: MobileProps) => {
     return (

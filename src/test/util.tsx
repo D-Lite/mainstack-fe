@@ -1,4 +1,3 @@
-import React from "react";
 import { ThemeProvider, extendTheme } from "@chakra-ui/react";
 
 export const ThemeWrapper = (props: any) => {

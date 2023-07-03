@@ -17,7 +17,7 @@ import {
 
 import PageViewGraph from './charts/PageViewGraph';
 import PieGraph from './charts/PieGraph';
-import { IGraphData, IPieDataForLocation, IPieDataForSources } from '../types/interfaces.types';
+import { IGraphData, IPieDataForLocation, IPieDataForSources, IGraphObject } from '../types/interfaces.types';
 import ChartService from '../services/chart.service';
 import { capitalizeFirstLetter, dateToLongDate, objectToArray, getGreetingTime } from '../constants/usables.constant';
 import { findFlagUrlByCountryName } from "country-flags-svg";
@@ -26,7 +26,7 @@ const Dashboard = () => {
 
     const [locations, setLocations] = useState<IPieDataForLocation[]>([]);
     const [sources, setSources] = useState<IPieDataForSources[]>([]);
-    const [graphData, setGraphData] = useState<{ views: object }>();
+    const [graphData, setGraphData] = useState<IGraphObject>({} as IGraphObject);
     const [graphDataModified, setGraphDataModified] = useState<IGraphData[]>();
     const [isLoaded, setIsLoaded] = useState<boolean>(false);
 
@@ -43,10 +43,10 @@ const Dashboard = () => {
     }, []);
 
     useEffect(() => {
-        if (graphData?.views) {
-            const dataCheck = objectToArray(graphData?.views);
+        if (graphData.views) {
+            const dataCheck: IGraphData[] = objectToArray(graphData.views);
             setGraphDataModified(dataCheck);
-            const dataChecked = dataCheck.forEach((item) => {
+            dataCheck.forEach((item) => {
                 item.key = dateToLongDate(item.key);
             })
         }
@@ -177,7 +177,7 @@ const Dashboard = () => {
                                                 ))}
                                             </VStack>
                                             <>
-                                                {locations && <PieGraph data={locations} colors={colors} />}
+                                                {locations && <PieGraph data={locations} colors={colors} type='country' />}
                                             </>
                                         </Stack>
                                     </Skeleton>
@@ -221,7 +221,7 @@ const Dashboard = () => {
                                                 ))}
                                             </VStack>
                                             <>
-                                                {sources && <PieGraph data={sources} colors={colors} />}
+                                                {sources && <PieGraph data={sources} colors={colors} type='source' />}
                                             </>
                                         </Stack>
                                     </Skeleton>

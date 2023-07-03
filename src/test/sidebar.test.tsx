@@ -10,7 +10,6 @@ import Sidebar from "../components/Sidebar";
 describe("<Sidebar />", () => {
 
     const { ResizeObserver } = window;
-    const img = HTMLImageElement;
 
     beforeEach(() => {
         window.ResizeObserver = vi.fn().mockImplementation(() => ({
@@ -19,7 +18,7 @@ describe("<Sidebar />", () => {
             disconnect: vi.fn()
         }));
 
-        render(<Sidebar onClose />, { wrapper: ThemeWrapper });
+        render(<Sidebar />, { wrapper: ThemeWrapper });
 
     });
 

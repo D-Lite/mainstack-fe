@@ -34,4 +34,10 @@ interface IGraphData {
     value: number;
 }
 
-export type { IPieData, INavObject, IPieDataForLocation, IPieDataForSources, IGraphData };
+interface IGraphObject {
+    views: {
+        [key: string]: number;
+    }
+}
+
+export type { IPieData, INavObject, IPieDataForLocation, IPieDataForSources, IGraphData, IGraphObject };
