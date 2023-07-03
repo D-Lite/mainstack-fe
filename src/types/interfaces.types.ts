@@ -26,7 +26,6 @@ interface INavNestedObject {
 
 interface INavObject {
     name: string;
-    icon: ComponentWithAs<"svg", IconProps>;
     subNavs: INavNestedObject[];
 }
 

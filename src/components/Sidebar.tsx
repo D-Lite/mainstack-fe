@@ -14,7 +14,7 @@ import {
 import { Icon, HStack } from '@chakra-ui/react';
 import { MdSettings } from 'react-icons/md'
 
-import { MainStackDashboardIcon, MainStackItemOneIcon, MainStackItemTwoIcon } from './Assets'
+import { MainStackDashboardIcon, MainStackItemFourIcon, MainStackItemFiveIcon, MainStackItemOneIcon, MainStackItemSixIcon, MainStackItemThreeIcon, MainStackItemTwoIcon, MainStackItemEightIcon, MainStackItemSevenIcon, MainStackMoreToggle } from './Assets'
 import NavItem from './SidebarItems';
 import MainstackLogo from './../assets/mainstack.svg';
 import { INavObject } from '../types/interfaces.types';
@@ -24,29 +24,26 @@ import { SearchIcon } from '@chakra-ui/icons';
 const LinkItems: INavObject[] = [
     {
         name: '',
-        icon: MainStackDashboardIcon,
         subNavs: [
             { name: 'Dashboard', icon: MainStackDashboardIcon, active: true },
-            { name: 'Item 1', icon: MainStackDashboardIcon, active: false },
-            { name: 'Item 2', icon: MainStackDashboardIcon, active: false },
-            { name: 'Item 3', icon: MainStackDashboardIcon, active: false }
+            { name: 'Item 1', icon: MainStackItemOneIcon, active: false },
+            { name: 'Item 2', icon: MainStackItemTwoIcon, active: false },
+            { name: 'Item 3', icon: MainStackItemThreeIcon, active: false }
         ]
     },
     {
         name: 'OTHERS 1',
-        icon: MainStackDashboardIcon,
         subNavs: [
-            { name: 'Item 4', icon: MainStackDashboardIcon, active: false },
-            { name: 'Item 5', icon: MainStackDashboardIcon, active: false }
+            { name: 'Item 4', icon: MainStackItemFourIcon, active: false },
+            { name: 'Item 5', icon: MainStackItemFiveIcon, active: false }
         ]
     },
     {
         name: 'OTHERS 2',
-        icon: MainStackDashboardIcon,
         subNavs: [
-            { name: 'Item 6', icon: MainStackDashboardIcon, active: false },
-            { name: 'Item 7', icon: MainStackDashboardIcon, active: false },
-            { name: 'Item 8', icon: MainStackDashboardIcon, active: false }
+            { name: 'Item 6', icon: MainStackItemSixIcon, active: false },
+            { name: 'Item 7', icon: MainStackItemSevenIcon, active: false },
+            { name: 'Item 8', icon: MainStackItemEightIcon, active: false }
         ]
     },
 
@@ -80,13 +77,13 @@ const Sidebar = ({ onClose, ...rest }: SidebarProps) => {
             </Flex>
             {LinkItems.map((navcategory) => (
                 <>
-                    <NavItem key={navcategory.name} icon={navcategory.icon}>
-                        {/* <Icon as={navcategory.icon} /> */}
-                        {navcategory.name}
-                    </NavItem>
+                    {navcategory.name && (
+                        <NavItem key={navcategory.name} >
+                            {navcategory.name}
+                        </NavItem>
+                    )}
                     {navcategory.subNavs.map((link, index) => (
-                        <NavItem key={index} icon={MdSettings} activeState={link.active}>
-                            {/* <Icon as={MdSettings} /> */}
+                        <NavItem key={index} icon={link.icon} activeState={link.active}>
                             {link.name}
                         </NavItem>
 
@@ -94,13 +91,15 @@ const Sidebar = ({ onClose, ...rest }: SidebarProps) => {
                 </>
             ))}
 
-            <Box ml="60px">
-                <HStack>
-                    <Avatar name='Dan Abrahmov' src='https://bit.ly/dan-abramov' size='sm' />
-                    <Text>
-                        Blessing Daniels
-                    </Text>
-                    <IconButton aria-label='Search database' icon={<SearchIcon />} />
+            <Box ml="60px" mt='100px' mr='16px'>
+                <HStack align='center' justify='space-between'>
+                    <Flex align='center'>
+                        <Avatar name='Dan Abrahmov' src='https://bit.ly/daniel-olabemiwo' size='sm' />
+                        <Text ml='12px'>
+                            Blessing Daniels
+                        </Text>
+                    </Flex>
+                    <MainStackMoreToggle />
                 </HStack>
             </Box>
         </Box>

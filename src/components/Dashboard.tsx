@@ -9,15 +9,15 @@ import {
     ButtonGroup,
     Button,
     useColorModeValue,
-
-
+    Icon,
+    createIcon
 } from '@chakra-ui/react';
 import PageViewGraph from './charts/PageViewGraph';
 import PieGraph from './charts/PieGraph';
 import { IGraphData, IPieDataForLocation, IPieDataForSources } from '../types/interfaces.types';
 import ChartService from '../services/chart.service';
 import { capitalizeFirstLetter, dateToLongDate, objectToArray } from '../constants/usables.constant';
-
+import { icons16 } from '../assets/icons';
 
 const Dashboard = () => {
 
@@ -59,9 +59,19 @@ const Dashboard = () => {
         { name: 'Custom Time', active: false }
     ]
 
+    const icons = Object.keys(icons16);
     return (
         <>
             <Box bg='brandWhite' minH='inherit' w='100vw'>
+                {/* {icons.map(icon => (
+                    <Box m={5} textAlign="center">
+                        <Icon name={icon} size='16px' color="teal.600" />
+                        <Text fontSize="xs" mt={1}>
+                            {icon}
+                        </Text>
+                    </Box>
+                ))} */}
+
                 <Container justifyContent='flex-start' maxW='100vw' pl={{ base: '20px', md: "380px" }} pr={{ base: 0, md: "60px" }}>
                     <HStack justify='space-between'>
                         <VStack align='flex-start'>
@@ -73,6 +83,11 @@ const Dashboard = () => {
 
                         <Text fontSize='14px' color='brandOrange'>View  analytics</Text>
                     </HStack>
+
+                    <Icon viewBox='0 0 20 20' color='red.100'>
+                        <path d="M11.25 7.49992V3.33325H16.6667V7.49992H11.25ZM3.33337 9.99992V3.33325H8.75004V9.99992H3.33337ZM11.25 16.6666V9.99992H16.6667V16.6666H11.25ZM3.33337 16.6666V12.4999H8.75004V16.6666H3.33337ZM4.16671 9.16658H7.91671V4.16659H4.16671V9.16658ZM12.0834 15.8333H15.8334V10.8333H12.0834V15.8333ZM12.0834 6.66659H15.8334V4.16659H12.0834V6.66659ZM4.16671 15.8333H7.91671V13.3333H4.16671V15.8333Z" fill="#FF5403" />
+                    </Icon>
+
 
                     <ButtonGroup variant='outline' spacing='12px'
                         color='brandBlack' borderRadius='100px' rounded={'full'}

@@ -12,9 +12,9 @@ import {
 } from '@chakra-ui/react';
 
 interface NavItemProps extends FlexProps {
-    icon: ComponentWithAs<"svg", IconProps>;
+    icon?: ComponentWithAs<"svg", IconProps>;
     children: ReactText;
-    activeState: boolean;
+    activeState?: boolean;
 }
 
 const NavItem = ({ icon, children, activeState }: NavItemProps) => {
@@ -23,22 +23,21 @@ const NavItem = ({ icon, children, activeState }: NavItemProps) => {
             <Flex
                 align="center"
                 p="4"
+                pl="60px"
                 borderLeft={activeState && "3px solid"}
                 borderTopColor={activeState && "brandOrange"}
                 color={activeState && "brandOrange"}
-                // borderRadius="lg"
                 role="group"
 
                 cursor="pointer"
                 _hover={{
-                    bg: 'brandWhite',
                     color: 'brandOrange',
                 }}
             >
                 {icon && (
                     <Icon
                         mr="4"
-                        ml="50px"
+                        ml="0px"
                         fontSize="16"
                         _groupHover={{
                             color: 'white',

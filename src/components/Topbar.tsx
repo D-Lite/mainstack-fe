@@ -6,6 +6,7 @@ import {
     useColorModeValue,
     FlexProps,
 } from '@chakra-ui/react';
+import { MainstackIcon } from './Assets';
 
 interface MobileProps extends FlexProps {
     onOpen: () => void;
@@ -35,7 +36,7 @@ const TopNav = ({ onOpen, ...rest }: MobileProps) => {
                 onClick={onOpen}
                 variant="outline"
                 aria-label="open menu"
-            // icon={<FiMenu />}
+                icon={<MainstackIcon />}
             />
         </Flex>
     );
