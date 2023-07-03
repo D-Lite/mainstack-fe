@@ -118,14 +118,15 @@ const Dashboard = () => {
                         <HStack justify='space-between'>
                             <VStack align='left'>
                                 <Skeleton height='40px' isLoaded={isLoaded}>
-
                                     <Heading size='lg' fontSize='18px'>
                                         Page Views
                                     </Heading>
                                     <Text fontSize='14px'>All time</Text>
                                 </Skeleton>
                             </VStack>
-                            <MainstackInfoIcon />
+                            <Skeleton height='40px' isLoaded={isLoaded}>
+                                <MainstackInfoIcon />
+                            </Skeleton>
                         </HStack>
 
                         <Skeleton size='20' isLoaded={isLoaded}>
