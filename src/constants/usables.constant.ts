@@ -11,3 +11,7 @@ export function dateToLongDate(date: Date): string {
 export function objectToArray<T>(obj: { [key: string]: T }): Array<{ key: string; value: T }> {
     return Object.entries(obj).map(([key, value]) => ({ key, value }));
 }
+
+export function capitalizeFirstLetter(str: string): string {
+    return str.charAt(0).toUpperCase() + str.slice(1);
+}

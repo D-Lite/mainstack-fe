@@ -16,7 +16,7 @@ import PageViewGraph from './charts/PageViewGraph';
 import PieGraph from './charts/PieGraph';
 import { IGraphData, IPieDataForLocation, IPieDataForSources } from '../types/interfaces.types';
 import ChartService from '../services/chart.service';
-import { dateToLongDate, objectToArray } from '../constants/usables.constant';
+import { capitalizeFirstLetter, dateToLongDate, objectToArray } from '../constants/usables.constant';
 
 
 const Dashboard = () => {
@@ -50,6 +50,15 @@ const Dashboard = () => {
 
     const pageCount = 0 || graphDataModified && graphDataModified.reduce((accumulator, currentObject) => accumulator + currentObject.value, 0);
 
+    const daysButton = [
+        { name: '1 Day', active: false },
+        { name: '3 Days', active: false },
+        { name: '7 Days', active: false },
+        { name: '30 Days', active: false },
+        { name: 'All Time', active: true },
+        { name: 'Custom Time', active: false }
+    ]
+
     return (
         <>
             <Box bg='brandWhite' minH='inherit' w='100vw'>
@@ -70,12 +79,12 @@ const Dashboard = () => {
                         my='20px'
                         flexWrap={'wrap'}
                     >
-                        <Button rounded={'full'} my={'5px'}>1 Day</Button>
-                        <Button rounded={'full'} my={'5px'}>3 Days</Button>
-                        <Button rounded={'full'} my={'5px'}>7 Days</Button>
-                        <Button rounded={'full'} my={'5px'}>30 Days</Button>
-                        <Button rounded={'full'} my={'5px'}>All Time</Button>
-                        <Button rounded={'full'} my={'5px'}>Custom Time</Button>
+
+                        {daysButton.map((days, index) => (
+
+                            <Button key={index} rounded={'full'} my={'5px'} colorScheme={days.active === true ? 'red' : 'gray'} bg={days.active ? 'red.300' : 'brandWhite'}>{days.name}</Button>
+
+                        ))}
                     </ButtonGroup>
 
                     <Box border={'1px solid'}
@@ -96,7 +105,7 @@ const Dashboard = () => {
                         {graphDataModified && <PageViewGraph data={graphDataModified} />}
                     </Box>
 
-                    <Box my='24px' overflow='clip'>
+                    <Box my='24px' mx='0'>
                         <HStack spacing='16px' w='100%'>
                             <Box
                                 border={'1px solid'}
@@ -111,9 +120,9 @@ const Dashboard = () => {
 
                                 <Box style={{ width: '100%' }}>
                                     <HStack my='30px'>
-                                        <VStack align='left' w='40%' spacing='18px'>
+                                        <VStack align='left' w='100%' spacing='18px'>
                                             {locations.map((entry, index) => (
-                                                <Heading key={`cell-${index}`} as='h6' fontSize='14px'>{entry.country}   {entry.percent}%</Heading>
+                                                <Heading key={`cell-${index}`} as='h6' fontSize='14px'>{capitalizeFirstLetter(entry.country)}   {entry.percent}%</Heading>
                                             ))}
                                         </VStack>
                                         <>
@@ -137,13 +146,13 @@ const Dashboard = () => {
 
                                 <Box style={{ width: '100%' }}>
                                     <HStack my='30px'>
-                                        <VStack align='left' w='40%' spacing='18px'>
+                                        <VStack align='left' w='100%' spacing='18px'>
                                             {sources.map((entry, index) => (
-                                                <Heading key={`cell-${index}`} as='h6' fontSize='14px'>{entry.source}   {entry.percent}%</Heading>
+                                                <Heading key={`cell-${index}`} as='h6' fontSize='14px'>{capitalizeFirstLetter(entry.source)}   {entry.percent}%</Heading>
                                             ))}
                                         </VStack>
                                         <>
-                                            {locations && <PieGraph data={sources} />}
+                                            {sources && <PieGraph data={sources} />}
                                         </>
                                     </HStack>
                                 </Box>

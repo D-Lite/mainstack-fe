@@ -1,29 +1,12 @@
-import React, { ReactNode } from 'react';
 import { ReactText } from 'react';
 
 import {
-    IconButton,
-    Avatar,
-    Box,
-    CloseButton,
     Flex,
-    HStack,
-    VStack,
     Icon,
-    useColorModeValue,
     Link,
-    Drawer,
-    DrawerContent,
-    Text,
-    TextProps,
-    useDisclosure,
-    BoxProps,
     FlexProps,
     Menu,
     MenuButton,
-    MenuDivider,
-    MenuItem,
-    MenuList,
     ComponentWithAs,
     IconProps,
 } from '@chakra-ui/react';
@@ -40,15 +23,16 @@ const NavItem = ({ icon, children, activeState }: NavItemProps) => {
             <Flex
                 align="center"
                 p="4"
-                borderLeft={activeState && "2px solid"}
-                borderColor={activeState && "brandOrange"}
+                borderLeft={activeState && "3px solid"}
+                borderTopColor={activeState && "brandOrange"}
+                color={activeState && "brandOrange"}
                 // borderRadius="lg"
                 role="group"
 
                 cursor="pointer"
                 _hover={{
-                    bg: 'brandOrange',
-                    color: 'white',
+                    bg: 'brandWhite',
+                    color: 'brandOrange',
                 }}
             >
                 {icon && (
