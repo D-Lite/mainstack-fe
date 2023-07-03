@@ -10,6 +10,8 @@ import {
     ButtonGroup,
     Button,
     useColorModeValue,
+    Skeleton,
+    SkeletonCircle
 } from '@chakra-ui/react';
 
 import PageViewGraph from './charts/PageViewGraph';
@@ -23,8 +25,9 @@ const Dashboard = () => {
 
     const [locations, setLocations] = useState<IPieDataForLocation[]>([]);
     const [sources, setSources] = useState<IPieDataForSources[]>([]);
-    const [graphData, setGraphData] = useState<unknown>();
+    const [graphData, setGraphData] = useState<{ views: object }>();
     const [graphDataModified, setGraphDataModified] = useState<IGraphData[]>();
+    const [isLoaded, setIsLoaded] = useState<boolean>(false);
 
     useEffect(() => {
         ChartService.getPieData()
@@ -76,8 +79,11 @@ const Dashboard = () => {
     }
 
     useEffect(() => {
-        getGreetingTime()
-    }, []);
+        if (sources && locations && graphDataModified) {
+            getGreetingTime()
+            setIsLoaded(true);
+        }
+    }, [graphDataModified]);
 
     const timeEmojis = {
         morning: '⛅️',
@@ -106,9 +112,9 @@ const Dashboard = () => {
                     >
 
                         {daysButton.map((days, index) => (
-
-                            <Button key={index} rounded={'full'} my={'5px'} colorScheme={days.active === true ? 'red' : 'gray'} bg={days.active ? 'red.300' : 'brandWhite'}>{days.name}</Button>
-
+                            <Skeleton size='16' isLoaded={isLoaded}>
+                                <Button key={index} rounded={'full'} my={'5px'} colorScheme={days.active === true ? 'red' : 'gray'} bg={days.active ? 'red.300' : 'brandWhite'}>{days.name}</Button>
+                            </Skeleton>
                         ))}
                     </ButtonGroup>
 
@@ -118,16 +124,27 @@ const Dashboard = () => {
                     >
                         <HStack>
                             <VStack align='left'>
-                                <Heading size='lg' fontSize='18px'>
-                                    Page Views
-                                </Heading>
-                                <Text fontSize='14px'>All time</Text>
+                                <Skeleton height='80px' isLoaded={isLoaded}>
+
+                                    <Heading size='lg' fontSize='18px'>
+                                        Page Views
+                                    </Heading>
+                                    <Text fontSize='14px'>All time</Text>
+                                </Skeleton>
                             </VStack>
                         </HStack>
-                        <Heading size='lg' fontSize='48px' my='30px'>
-                            {pageCount ? pageCount : 0}
-                        </Heading>
-                        {graphDataModified && <PageViewGraph data={graphDataModified} />}
+
+                        <Skeleton size='20' my='20px' isLoaded={isLoaded}>
+
+                            <Heading size='lg' fontSize='48px' my='30px'>
+                                {pageCount ? pageCount : 0}
+                            </Heading>
+                        </Skeleton>
+
+
+                        <Skeleton height='500px' isLoaded={isLoaded} fadeDuration={4}>
+                            {graphDataModified && <PageViewGraph data={graphDataModified} />}
+                        </Skeleton>
                     </Box>
 
                     <Box my='24px' mx='0'>
@@ -137,23 +154,31 @@ const Dashboard = () => {
                                 borderColor={useColorModeValue('gray.200', 'gray.700')}
                                 p='24px' borderRadius='12px' w={{ base: '100%', md: '100%', lg: '50%', xl: '50%' }}>
                                 <HStack justify='space-between'>
-                                    <Heading size='lg' fontSize='18px'>
-                                        Top Locations
-                                    </Heading>
-                                    <Text fontSize='14px' color='brandOrange'>View full reports</Text>
+                                    <Skeleton height='40px' isLoaded={isLoaded}>
+                                        <Heading size='lg' fontSize='18px'>
+                                            Top Locations
+                                        </Heading>
+                                    </Skeleton>
+
+                                    <Skeleton height='40px' isLoaded={isLoaded}>
+                                        <Text fontSize='14px' color='brandOrange'>View full reports</Text>
+                                    </Skeleton>
                                 </HStack>
 
                                 <Box style={{ width: '100%' }}>
-                                    <Stack my='30px' direction={['column', 'column', 'column', 'column', 'row']}>
-                                        <VStack align='left' w='100%' spacing='18px'>
-                                            {locations.map((entry, index) => (
-                                                <Heading key={`cell-${index}`} as='h6' fontSize='14px'>{capitalizeFirstLetter(entry.country)}   {entry.percent}%</Heading>
-                                            ))}
-                                        </VStack>
-                                        <>
-                                            {locations && <PieGraph data={locations} />}
-                                        </>
-                                    </Stack>
+                                    <Skeleton height='300px' isLoaded={isLoaded} fadeDuration={4}>
+
+                                        <Stack my='30px' direction={['column', 'column', 'column', 'column', 'row']}>
+                                            <VStack align='left' w='100%' spacing='18px'>
+                                                {locations.map((entry, index) => (
+                                                    <Heading key={`cell-${index}`} as='h6' fontSize='14px'>{capitalizeFirstLetter(entry.country)}   {entry.percent}%</Heading>
+                                                ))}
+                                            </VStack>
+                                            <>
+                                                {locations && <PieGraph data={locations} />}
+                                            </>
+                                        </Stack>
+                                    </Skeleton>
                                 </Box>
 
                             </Box>
@@ -163,23 +188,30 @@ const Dashboard = () => {
                                 borderColor={useColorModeValue('gray.200', 'gray.700')}
                                 p='24px' borderRadius='12px' w={{ base: '100%', md: '100%', lg: '50%', xl: '50%' }}>
                                 <HStack justify='space-between'>
-                                    <Heading size='lg' fontSize='18px'>
-                                        Top Referral source
-                                    </Heading>
-                                    <Text fontSize='14px' color='brandOrange'>View full reports</Text>
+                                    <Skeleton height='40px' isLoaded={isLoaded}>
+                                        <Heading size='lg' fontSize='18px'>
+                                            Top Referral source
+                                        </Heading>
+                                    </Skeleton>
+
+                                    <Skeleton height='40px' isLoaded={isLoaded}>
+                                        <Text fontSize='14px' color='brandOrange'>View full reports</Text>
+                                    </Skeleton>
                                 </HStack>
 
                                 <Box style={{ width: '100%' }}>
-                                    <Stack my='30px' direction={['column', 'column', 'column', 'column', 'row']}>
-                                        <VStack align='left' w='100%' spacing='18px'>
-                                            {sources.map((entry, index) => (
-                                                <Heading key={`cell-${index}`} as='h6' fontSize='14px'>{capitalizeFirstLetter(entry.source)}   {entry.percent}%</Heading>
-                                            ))}
-                                        </VStack>
-                                        <>
-                                            {sources && <PieGraph data={sources} />}
-                                        </>
-                                    </Stack>
+                                    <Skeleton height='300px' isLoaded={isLoaded} fadeDuration={4}>
+                                        <Stack my='30px' direction={['column', 'column', 'column', 'column', 'row']}>
+                                            <VStack align='left' w='100%' spacing='18px'>
+                                                {sources.map((entry, index) => (
+                                                    <Heading key={`cell-${index}`} as='h6' fontSize='14px'>{capitalizeFirstLetter(entry.source)}   {entry.percent}%</Heading>
+                                                ))}
+                                            </VStack>
+                                            <>
+                                                {sources && <PieGraph data={sources} />}
+                                            </>
+                                        </Stack>
+                                    </Skeleton>
                                 </Box>
 
                             </Box>

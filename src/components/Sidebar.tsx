@@ -98,8 +98,7 @@ const Sidebar = ({ onClose, ...rest }: SidebarProps) => {
                             Blessing Daniels
                         </Text>
                     </Flex>
-                    <IconButton icon={<MainStackMoreToggle />} variant='unstyled' />
-                    {/* // <MainStackMoreToggle /> */}
+                    <IconButton icon={<MainStackMoreToggle />} variant='unstyled' aria-label={''} />
                 </HStack>
             </Box>
         </Box>
