@@ -1,5 +1,6 @@
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import { IGraphData } from '../../types/interfaces.types';
+import { Box } from '@chakra-ui/react';
 
 interface PageViewGraphProps {
     data: IGraphData[];
@@ -7,7 +8,7 @@ interface PageViewGraphProps {
 const PageViewGraph = ({ data }: PageViewGraphProps) => {
 
     return (
-        <div style={{ width: '100%', height: 500 }}>
+        <Box style={{ width: '100%', height: 500 }}>
             <ResponsiveContainer>
                 <AreaChart width={730} height={250} data={data}
                     margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
@@ -24,7 +25,7 @@ const PageViewGraph = ({ data }: PageViewGraphProps) => {
                     <Area type="monotone" dataKey="value" stroke="#FF5403" fillOpacity={1} fill="url(#colorUv)" />
                 </AreaChart>
             </ResponsiveContainer>
-        </div>
+        </Box>
     )
 };
 

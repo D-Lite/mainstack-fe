@@ -5,7 +5,6 @@ import {
     Box,
     CloseButton,
     Flex,
-    Heading,
     Image,
     Text,
     useColorModeValue,
@@ -14,7 +13,7 @@ import {
 import { Icon, HStack } from '@chakra-ui/react';
 import { MdSettings } from 'react-icons/md'
 
-import { MainStackDashboardIcon, MainStackItemFourIcon, MainStackItemFiveIcon, MainStackItemOneIcon, MainStackItemSixIcon, MainStackItemThreeIcon, MainStackItemTwoIcon, MainStackItemEightIcon, MainStackItemSevenIcon, MainStackMoreToggle } from './Assets'
+import { MainStackDashboardIcon, MainStackItemFourIcon, MainStackItemFiveIcon, MainStackItemOneIcon, MainStackItemSixIcon, MainStackItemThreeIcon, MainStackItemTwoIcon, MainStackItemEightIcon, MainStackItemSevenIcon, MainStackMoreToggle } from '../assets/MainstackIconPack'
 import NavItem from './SidebarItems';
 import MainstackLogo from './../assets/mainstack.svg';
 import { INavObject } from '../types/interfaces.types';
@@ -99,7 +98,8 @@ const Sidebar = ({ onClose, ...rest }: SidebarProps) => {
                             Blessing Daniels
                         </Text>
                     </Flex>
-                    <MainStackMoreToggle />
+                    <IconButton icon={<MainStackMoreToggle />} variant='unstyled' />
+                    {/* // <MainStackMoreToggle /> */}
                 </HStack>
             </Box>
         </Box>

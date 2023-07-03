@@ -6,7 +6,7 @@ import {
     useColorModeValue,
     FlexProps,
 } from '@chakra-ui/react';
-import { MainstackIcon } from './Assets';
+import { MainstackIcon } from '../assets/MainstackIconPack';
 
 interface MobileProps extends FlexProps {
     onOpen: () => void;

@@ -5,8 +5,6 @@ import {
     Icon,
     Link,
     FlexProps,
-    Menu,
-    MenuButton,
     ComponentWithAs,
     IconProps,
 } from '@chakra-ui/react';
