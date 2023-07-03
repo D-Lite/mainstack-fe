@@ -21,7 +21,6 @@ import { IGraphData, IPieDataForLocation, IPieDataForSources } from '../types/in
 import ChartService from '../services/chart.service';
 import { capitalizeFirstLetter, dateToLongDate, objectToArray, getGreetingTime } from '../constants/usables.constant';
 import { findFlagUrlByCountryName } from "country-flags-svg";
-import { ReactSocialMediaIcons } from 'react-social-media-icons';
 
 const Dashboard = () => {
 
