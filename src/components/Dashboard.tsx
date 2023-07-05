@@ -161,7 +161,7 @@ const Dashboard = () => {
                                 </HStack>
 
                                 <Box style={{ width: '100%' }}>
-                                    <Skeleton height='300px' isLoaded={isLoaded} fadeDuration={4} data-testid="locationsPieSkeletonTest">
+                                    <Skeleton minHeight='300px' isLoaded={isLoaded} fadeDuration={4} data-testid="locationsPieSkeletonTest">
 
                                         <Stack my='30px' direction={['column', 'column', 'column', 'column', 'row']} align='center'>
                                             <VStack align='left' w='100%' spacing='18px'>
@@ -205,7 +205,7 @@ const Dashboard = () => {
                                 </HStack>
 
                                 <Box style={{ width: '100%' }}>
-                                    <Skeleton height='300px' isLoaded={isLoaded} fadeDuration={4} data-testid="sourcesPieSkeletonTest">
+                                    <Skeleton minHeight='300px' isLoaded={isLoaded} fadeDuration={4} data-testid="sourcesPieSkeletonTest">
                                         <Stack my='30px' direction={['column', 'column', 'column', 'column', 'row']} align='center'>
                                             <VStack align='left' w='100%' spacing='18px'>
                                                 {sources.map((entry, index) => (

@@ -7,12 +7,10 @@ function App() {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
-    <Container bg='brandWhite' p='0' maxW='100vw'>
+    <Container bg='brandWhite' p='0'>
       <Sidebar
-        onClose={() => onClose
-        }
+        onClose={() => onClose}
         display={{ base: 'none', md: 'block' }}
-      // maxW='30vw'
       />
       < Drawer
         autoFocus={false}
